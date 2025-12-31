@@ -16,6 +16,8 @@ function App() {
   const [timeSetAt, setTimeSetAt] = useState(null)
   const [timeUntilMidnight, setTimeUntilMidnight] = useState(null)
   const [isNewYear, setIsNewYear] = useState(false)
+  const [loadingProgress, setLoadingProgress] = useState(0)
+  const [isLoadingComplete, setIsLoadingComplete] = useState(false)
   const countdownInterval = useRef(null)
   const hasReachedMidnight = useRef(false)
 
@@ -30,6 +32,27 @@ function App() {
     setCurrentTime(targetTime)
     setTimeSetAt(now)
   }
+
+  useEffect(() => {
+    // Simulate loading progress in steps: 5-7-15-30-50-75-100
+    const steps = [5, 7, 15, 30, 50, 75, 100]
+    let currentStepIndex = 0
+    
+    const progressInterval = setInterval(() => {
+      if (currentStepIndex < steps.length) {
+        setLoadingProgress(steps[currentStepIndex])
+        
+        if (steps[currentStepIndex] === 100) {
+          clearInterval(progressInterval)
+          setIsLoadingComplete(true)
+        }
+        
+        currentStepIndex++
+      }
+    }, 500) // Change step every 500ms (3.5 seconds total)
+
+    return () => clearInterval(progressInterval)
+  }, [])
 
   useEffect(() => {
     // Fetch current time from internet and calculate midnight
@@ -225,11 +248,26 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyPress)
   }, [])
 
-  if (!currentTime) {
+  if (!currentTime || !isLoadingComplete) {
     return (
       <div className="app">
+        <Starfield interactive={false} />
+        <CursorTrail />
         <div className="countdown-container">
-          <div className="loading-text">Loading...</div>
+          <div className="loading-content">
+            <div className="loading-text">Loading...</div>
+            <div className="loading-bar-container">
+              <div className="loading-bar-background">
+                <div 
+                  className="loading-bar-fill" 
+                  style={{ width: `${Math.min(loadingProgress, 100)}%` }}
+                >
+                  <div className="loading-bar-glow"></div>
+                </div>
+              </div>
+              <div className="loading-percentage">{Math.floor(Math.min(loadingProgress, 100))}%</div>
+            </div>
+          </div>
         </div>
       </div>
     )
