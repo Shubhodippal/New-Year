@@ -165,6 +165,9 @@ function App() {
     const handleTouchMove = (e) => {
       if (!window.touchStartY) return
       
+      // Prevent pull-to-refresh
+      e.preventDefault()
+      
       const touch = e.touches[0]
       const delta = window.touchStartY - touch.clientY
       window.touchStartY = touch.clientY
@@ -185,7 +188,7 @@ function App() {
 
     window.addEventListener('wheel', handleScroll, { passive: false })
     window.addEventListener('touchstart', handleTouchStart, { passive: true })
-    window.addEventListener('touchmove', handleTouchMove, { passive: true })
+    window.addEventListener('touchmove', handleTouchMove, { passive: false })
     
     return () => {
       window.removeEventListener('wheel', handleScroll)
