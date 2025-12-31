@@ -5,7 +5,7 @@ const NewYearMessage = ({ scene, clickCount }) => {
     <div className="message-container">
       {/* Scene 1: Countdown */}
       <div className={`countdown ${scene >= 1 && scene < 2 ? 'active' : ''} ${scene >= 2 ? 'exit' : ''}`}>
-        <div className="countdown-text">For someone who makes every moment brighter, one who lights up my world, one in whose depth of eyes I forgot all my pain...</div>
+        <div className="countdown-text">For the one who makes every moment brighter, one who lights up my world, one in whose depth of eyes I forgot all my pain...</div>
         <div className="floating-sparkles">
           <span className="sparkle">✦</span>
           <span className="sparkle">✧</span>
