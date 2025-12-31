@@ -260,7 +260,7 @@ function App() {
                 </div>
               </div>
               <p className="countdown-message">Until the magic begins...</p>
-              <button className="test-button" onClick={handleTestCountdown}>Test (10s countdown)</button>
+              {/* <button className="test-button" onClick={handleTestCountdown}>Test (10s countdown)</button> */}
             </>
           ) : (
             <div className="loading-text">Loading...</div>
