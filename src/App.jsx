@@ -165,11 +165,14 @@ function App() {
     const handleTouchMove = (e) => {
       if (!window.touchStartY) return
       
-      // Prevent pull-to-refresh
-      e.preventDefault()
-      
       const touch = e.touches[0]
       const delta = window.touchStartY - touch.clientY
+      
+      // Prevent pull-to-refresh only when at the top and pulling down
+      if (scrollProgress === 0 && delta < 0) {
+        e.preventDefault()
+      }
+      
       window.touchStartY = touch.clientY
       
       setScrollProgress(prev => {

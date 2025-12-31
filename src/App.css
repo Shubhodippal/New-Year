@@ -6,11 +6,6 @@
   box-sizing: border-box;
 }
 
-body {
-  overscroll-behavior: none;
-  touch-action: pan-y;
-}
-
 .app {
   width: 100vw;
   height: 100vh;
@@ -21,8 +16,6 @@ body {
   align-items: center;
   justify-content: center;
   transition: background 0.3s ease;
-  overscroll-behavior: none;
-  touch-action: none;
 }
 
 .overlay {
