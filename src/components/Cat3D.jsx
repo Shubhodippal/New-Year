@@ -1,10 +1,16 @@
 import './Cat3D.css'
 
 function Cat3D({ scene }) {
-  if (scene < 8) return null
+  const isVisible = scene >= 10
 
   return (
-    <div className="cat3d-container">
+    <div className={`cat3d-container ${isVisible ? 'visible' : 'hidden'}`}>
+      {/* Left scroll zone - allows scroll to pass through */}
+      <div className="scroll-zone scroll-zone-left"></div>
+      
+      {/* Right scroll zone - allows scroll to pass through */}
+      <div className="scroll-zone scroll-zone-right"></div>
+      
       {/* Sketchfab Embed */}
       <div className="sketchfab-embed-wrapper">
         <iframe 
@@ -27,11 +33,13 @@ function Cat3D({ scene }) {
         />
       </div>
       
-      <div className="cat-message">
-        <h2 className="cat-text">You're Amazing! 💕</h2>
-        <p className="cat-subtext">👋 Meow~ Wishing you endless joy in 2026! 🐾</p>
-        <p className="cat-hint">✨ Drag to rotate • Scroll to zoom ✨</p>
-      </div>
+      {isVisible && (
+        <div className="cat-message">
+          <h2 className="cat-text">You're Amazing! 💕</h2>
+          <p className="cat-subtext">👋 Meow~ Wishing you endless joy in 2026! 🐾</p>
+          <p className="cat-hint">✨ Drag center to rotate • Swipe edges to scroll ✨</p>
+        </div>
+      )}
     </div>
   )
 }

@@ -145,9 +145,9 @@ function App() {
       setScrollProgress(prev => {
         const newProgress = Math.max(0, Math.min(1, prev + delta * 0.0003))
         
-        // Map progress to scenes (0-9)
-        const newScene = Math.floor(newProgress * 10)
-        setScene(Math.min(newScene, 9))
+        // Map progress to scenes (0-11)
+        const newScene = Math.floor(newProgress * 12)
+        setScene(Math.min(newScene, 11))
         
         // Increment click count for secret messages
         if (Math.floor(newProgress * 100) % 5 === 0) {
@@ -179,8 +179,8 @@ function App() {
       setScrollProgress(prev => {
         const newProgress = Math.max(0, Math.min(1, prev + delta * 0.0005))
         
-        const newScene = Math.floor(newProgress * 10)
-        setScene(Math.min(newScene, 9))
+        const newScene = Math.floor(newProgress * 12)
+        setScene(Math.min(newScene, 11))
         
         if (Math.floor(newProgress * 100) % 5 === 0) {
           setClickCount(c => c + 1)
@@ -206,16 +206,16 @@ function App() {
       if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
         setScrollProgress(prev => {
           const newProgress = Math.min(1, prev + 0.04)
-          const newScene = Math.floor(newProgress * 10)
-          setScene(Math.min(newScene, 9))
+          const newScene = Math.floor(newProgress * 12)
+          setScene(Math.min(newScene, 11))
           setClickCount(c => c + 1)
           return newProgress
         })
       } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
         setScrollProgress(prev => {
           const newProgress = Math.max(0, prev - 0.04)
-          const newScene = Math.floor(newProgress * 10)
-          setScene(Math.min(newScene, 9))
+          const newScene = Math.floor(newProgress * 12)
+          setScene(Math.min(newScene, 11))
           return newProgress
         })
       }

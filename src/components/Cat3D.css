@@ -7,12 +7,48 @@
   z-index: 100;
   pointer-events: all;
   background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 30%, #80deea 60%, #4dd0e1 100%);
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.cat3d-container.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.cat3d-container.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+
+.scroll-zone {
+  position: absolute;
+  top: 0;
+  width: 20%;
+  height: 100%;
+  z-index: 102;
+  pointer-events: all;
+  touch-action: pan-y;
+}
+
+.scroll-zone-left {
+  left: 0;
+}
+
+.scroll-zone-right {
+  right: 0;
 }
 
 .sketchfab-embed-wrapper {
   width: 100%;
   height: 100%;
   position: relative;
+  pointer-events: none;
+}
+
+.sketchfab-embed-wrapper iframe {
+  pointer-events: all;
 }
 
 .cat-message {
