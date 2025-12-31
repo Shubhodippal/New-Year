@@ -6,6 +6,7 @@ import NewYearMessage from './components/NewYearMessage'
 import ParticleSystem from './components/ParticleSystem'
 import CursorTrail from './components/CursorTrail'
 import InteractiveHearts from './components/InteractiveHearts'
+import Cat3D from './components/Cat3D'
 
 function App() {
   const [scene, setScene] = useState(0)
@@ -144,9 +145,9 @@ function App() {
       setScrollProgress(prev => {
         const newProgress = Math.max(0, Math.min(1, prev + delta * 0.0003))
         
-        // Map progress to scenes (0-8)
-        const newScene = Math.floor(newProgress * 9)
-        setScene(Math.min(newScene, 8))
+        // Map progress to scenes (0-9)
+        const newScene = Math.floor(newProgress * 10)
+        setScene(Math.min(newScene, 9))
         
         // Increment click count for secret messages
         if (Math.floor(newProgress * 100) % 5 === 0) {
@@ -178,8 +179,8 @@ function App() {
       setScrollProgress(prev => {
         const newProgress = Math.max(0, Math.min(1, prev + delta * 0.0005))
         
-        const newScene = Math.floor(newProgress * 9)
-        setScene(Math.min(newScene, 8))
+        const newScene = Math.floor(newProgress * 10)
+        setScene(Math.min(newScene, 9))
         
         if (Math.floor(newProgress * 100) % 5 === 0) {
           setClickCount(c => c + 1)
@@ -205,16 +206,16 @@ function App() {
       if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
         setScrollProgress(prev => {
           const newProgress = Math.min(1, prev + 0.04)
-          const newScene = Math.floor(newProgress * 9)
-          setScene(Math.min(newScene, 8))
+          const newScene = Math.floor(newProgress * 10)
+          setScene(Math.min(newScene, 9))
           setClickCount(c => c + 1)
           return newProgress
         })
       } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
         setScrollProgress(prev => {
           const newProgress = Math.max(0, prev - 0.04)
-          const newScene = Math.floor(newProgress * 9)
-          setScene(Math.min(newScene, 8))
+          const newScene = Math.floor(newProgress * 10)
+          setScene(Math.min(newScene, 9))
           return newProgress
         })
       }
@@ -259,7 +260,7 @@ function App() {
                 </div>
               </div>
               <p className="countdown-message">Until the magic begins...</p>
-              {/* <button className="test-button" onClick={handleTestCountdown}>Test (10s countdown)</button> */}
+              <button className="test-button" onClick={handleTestCountdown}>Test (10s countdown)</button>
             </>
           ) : (
             <div className="loading-text">Loading...</div>
@@ -277,8 +278,9 @@ function App() {
       <ParticleSystem active={scene >= 3} />
       <Fireworks active={scene >= 3 && scene <= 5} intensity={scene === 4 ? 'high' : 'normal'} />
       <NewYearMessage scene={scene} clickCount={clickCount} />
+      <Cat3D scene={scene} />
       
-      {scene >= 1 && scene < 7 && (
+      {scene >= 1 && scene < 9 && (
         <div className="scroll-hint">
           <span className="hint-text">Scroll to continue</span>
           <span className="hint-icon">↓</span>
